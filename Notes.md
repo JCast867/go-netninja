@@ -168,3 +168,50 @@ func main() {
 	fmt.Println(sort.SearchStrings(names, "eli"))  // finds the index where the parameter appears
 }
 ```
+
+
+## 7. Loops
+There are a couple ways to do a loop in Go.
+
+#### While Loop
+This first one is basically a `while` loop. Go doesn't have a `while` command like most other programming lamguages but it's basically the same thing
+```go
+x := 0
+for x < 5 {
+    fmt.Println(x)
+    x++
+}
+```
+
+#### For Loop
+Another way to do it is using a basic `for` loop. The syntax is very similar to Java
+```go
+for i := 0; i < 5; i++ {
+    fmt.Println(i)
+}
+
+names := []string{"eli", "jaime", "jcast", "ivy"}
+for i := 0; i < len(names); i++ {
+    fmt.Println(names[i])
+}
+```
+
+#### For ... Range Loop
+Lastly, there's the `for ... range` loop. This allows you to get the index and value using the `range` function inside the for loop.
+```go
+for index, value := range names {
+    fmt.Println(index, value)
+}
+```
+
+If you don't want the index or the value, you can simply do this to not include them because if you don't use the values, you will get an error
+```go
+// no index
+for _, value := range names {
+    fmt.Println(value)
+}
+
+// no value
+for index := range names {
+    fmt.Println(index)
+}
