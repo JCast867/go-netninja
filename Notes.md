@@ -66,3 +66,40 @@ var scoreTwo float64 = 5474547467.67
 scoreThree := 1.5  // scoreThree will be a float64
 ```
 Floats also have the same thing with bits like we talked about before. Usually, `float64` are the default ones and will automatically be assigned to variables if not defined
+
+
+## 4. Printing and Formatting Strings
+Just for context, we'll be inside this function. Additionally, `fmt` is a standard library package that provides functions for formatted input and output.
+```go
+package main
+import "fmt"
+
+func main() {
+    age := 35
+    name := "jaime"
+}
+```
+### Print
+`fmt.Print()` will not give you a new line after printing something. `fmt.Println()` will though. Which is why if we ran this code, the output will be `HelloWorld!`. Additionally, it's simple to print out variables as well
+```go
+// Print
+fmt.Print("Hello\n")
+
+// Println
+fmt.Println("World!")
+fmt.Println("my age is", age, "and my name is", name)
+
+//Printf (formatted sring) %_ = format specifier
+fmt.Printf("my age is %v and my name is %v\n", age, name)
+fmt.Printf("my age is %q and my name is %q\n", age, name)  // %q puts quotes around the string
+fmt.Printf("age is of type %T\n", age)  // %T gives you the type of the variable
+fmt.Printf("you scored %f points!\n", 225.55)  // %f is for floats and you're allowed to put 0.1, 0.01, etc to round the decimal points
+fmt.Printf("you scored %0.1f points!\n", 225.55)
+
+// Sprintf (save formatted atrings)
+var str = fmt.Sprintf("my age is %v and my name is %\n", age, name)
+fmt.Println("Saved string is:", str)
+```
+Using `fmt.Printf()` is a bit more complicated. It's very similar to how C handles printing variables. With the `%_` and a letter after (_ represents a letter)
+
+`fmt.Sprintf()` allows you to store these formatted string into a variable.

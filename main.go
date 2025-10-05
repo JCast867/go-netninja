@@ -3,38 +3,24 @@ package main
 import "fmt"
 
 func main() {
+	age := 22
+	name := "jaime"
 
-	// strings
-	var nameOne string = "jaime"
-	var nameTwo = "eli"
-	var nameThree string
+	// Print
+	fmt.Print("Hello\n")
 
-	fmt.Println(nameOne, nameTwo, nameThree)
+	// Println
+	fmt.Println("World!")
+	fmt.Println("my age is", age, "and my name is", name)
 
-	nameOne = "jcast"
-	nameThree = "ivy"
+	// Printf (formatted sring) %_ = format specifier
+	fmt.Printf("my age is %v and my name is %v\n", age, name)
+	fmt.Printf("my age is %q and my name is %q\n", age, name) // %q puts quotes around the string
+	fmt.Printf("age is of type %T\n", age)                    // %T gives you the type of the variable
+	fmt.Printf("you scored %f points!\n", 225.55)             // %f is for floats and you're allowed to put 0.1, 0.01, etc to round the decimal points
+	fmt.Printf("you scored %0.1f points!\n", 225.55)
 
-	fmt.Println(nameOne, nameTwo, nameThree)
-
-	nameFour := "Caca"
-	fmt.Println(nameOne, nameTwo, nameThree, nameFour)
-
-	// ints
-	var ageOne int = 22
-	var ageTwo = 21
-	ageThree := 4
-
-	fmt.Println(ageOne, ageTwo, ageThree)
-
-	// bits and memory
-	var numOne int8 = 25
-	var numTwo int8 = -128
-	var numThree uint16 = 256
-	fmt.Println(numOne, numTwo, numThree)
-
-	// floats
-	var scoreOne float32 = 25.98
-	var scoreTwo float64 = 5474547467.67
-	scoreThree := 1.5
-	fmt.Println(scoreOne, scoreTwo, scoreThree)
+	// Sprintf (save formatted atrings)
+	var str = fmt.Sprintf("my age is %v and my name is %v\n", age, name)
+	fmt.Println("Saved string is:", str)
 }
