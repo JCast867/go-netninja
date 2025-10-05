@@ -103,3 +103,32 @@ fmt.Println("Saved string is:", str)
 Using `fmt.Printf()` is a bit more complicated. It's very similar to how C handles printing variables. With the `%_` and a letter after (_ represents a letter)
 
 `fmt.Sprintf()` allows you to store these formatted string into a variable.
+
+
+## 5. Arrays and Slices
+### Arrays (Static Arrays)
+To define an array we can do this
+```go
+var ages [3]int = [3]int{20, 25, 22}
+var ages = [3]int{20, 25, 22}  // this is the same as the one above
+
+names := [4]string{"eli", "jaime", "jcast", "ivy"}
+```
+Since arrays are like static arrays, the size of the array is defined and cannot be altered. Meaning that you can't add elements to it that's greater than the specified size. Additionally, you cannot mix in integers, string, etc, together.
+
+### Slices (Dynamic Arrays)
+```go
+var scores = []int{100, 50, 60}
+scores[2] = 25
+scores = append(scores, 85)
+
+// slice ranges
+rangeOne = := names[1:3]
+rangeTwo := names[2:]
+rangeThree := names[:3]
+
+rangeOne = append(rangeOne, "bob")
+```
+Since slices are like dynamic arrays, you don't have to specify the size of the array and you can append as much elements as you want. 
+
+Additionally, slice ranges are very similar to Python as the first element is inclusive but the last one is not

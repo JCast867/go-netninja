@@ -3,24 +3,23 @@ package main
 import "fmt"
 
 func main() {
-	age := 22
-	name := "jaime"
+	// var ages [3]int = [3]int{20, 25, 22}
+	var ages = [3]int{20, 25, 22}
 
-	// Print
-	fmt.Print("Hello\n")
+	names := [4]string{"eli", "jaime", "jcast", "ivy"}
 
-	// Println
-	fmt.Println("World!")
-	fmt.Println("my age is", age, "and my name is", name)
+	fmt.Println(ages, len(ages))
+	fmt.Println(names, len(names))
 
-	// Printf (formatted sring) %_ = format specifier
-	fmt.Printf("my age is %v and my name is %v\n", age, name)
-	fmt.Printf("my age is %q and my name is %q\n", age, name) // %q puts quotes around the string
-	fmt.Printf("age is of type %T\n", age)                    // %T gives you the type of the variable
-	fmt.Printf("you scored %f points!\n", 225.55)             // %f is for floats and you're allowed to put 0.1, 0.01, etc to round the decimal points
-	fmt.Printf("you scored %0.1f points!\n", 225.55)
+	var scores = []int{100, 50, 60}
+	scores[2] = 25
+	scores = append(scores, 85)
 
-	// Sprintf (save formatted atrings)
-	var str = fmt.Sprintf("my age is %v and my name is %v\n", age, name)
-	fmt.Println("Saved string is:", str)
+	fmt.Println(scores, len(scores))
+
+	rangeOne := names[1:3]
+	rangeTwo := names[2:]
+	rangeThree := names[:3]
+	rangeOne = append(rangeOne, "bob")
+	fmt.Println(rangeOne, rangeTwo, rangeThree)
 }
