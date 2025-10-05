@@ -132,3 +132,39 @@ rangeOne = append(rangeOne, "bob")
 Since slices are like dynamic arrays, you don't have to specify the size of the array and you can append as much elements as you want. 
 
 Additionally, slice ranges are very similar to Python as the first element is inclusive but the last one is not
+
+
+## 6. The Standard Library
+Go has many packages available that do many useful things like sorting arrays, searching for values, etc. Here are a couple:
+```go
+package main
+
+import (
+	"fmt"
+	"sort"
+	"strings"
+)
+
+func main() {
+	greeting := "hello there !"
+
+	fmt.Println(strings.Contains(greeting, "hello"))  // checks to see if the first parameter contains the second parameter and returns a boolean 
+	fmt.Println(strings.ReplaceAll(greeting, "hello", "hi"))  // replaces the second parameter with the third parameter in the first parameter (this DOES NOT alter the original string, greeting in this case)
+	fmt.Println(strings.ToUpper(greeting))  // changes the letters to all uppercase in the parameter (doesn't alter)
+	fmt.Println(strings.Index(greeting, "ll"))  // finds the index of where the second parameter appears in the first parameter. if the second parameter doesn't exist in the first parameter, it returns the length + 1 of the first parameter
+	fmt.Println(strings.Split(greeting, " "))  // splits the first parameter into an array depending on the second parameter
+
+	ages := []int{45, 20, 78, 53, 25, 12, 56}
+	sort.Ints(ages)  // sorts the array from smallest to largest (this DOES alter the parameter)
+	fmt.Println((ages))
+
+	index := sort.SearchInts(ages, 53)  // finds the index where the parameter appears
+	fmt.Println(index)
+
+	names := []string{"eli", "jaime", "jcast", "ivy"}
+	sort.Strings(names)  // from smallest to largest again
+	fmt.Println(names)
+
+	fmt.Println(sort.SearchStrings(names, "eli"))  // finds the index where the parameter appears
+}
+```
