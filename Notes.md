@@ -262,3 +262,33 @@ for index, value := range names {
 What `continue` will do is if `index == 1` is `true`, then everything under it will not execute. It will just continue the for loop and skipping all the code under it. 
 
 What `break` will do is if `index > 2` is `true`, then the for loop will break and it will no longer execute even if we didnt get through the entire names range
+
+
+## 9. Using Functions
+A function can be defines as depicted below. The `func` keyword, the name of the function, and the parameters and parameter types
+```go
+func sayGreeting(n string) {
+    fmt.Println("Good Morning", n)
+}
+```
+So once this is passed through `main()`, it'll just say good morning to whatever name passed through
+
+Another way to use funtions is by passing in more interesing parameters like slices (dynamic arrays) and another function
+```go
+func cycleNames(n []string, f func(string)) {
+    for _, v := range n {
+        f(v)
+    }
+}
+func main() {
+    cycleNames([]string{"jaime", "eli"}, sayGreeting)
+}
+```
+So we're passing in an array of names and a function that takes in a string and that function does something to each array value inside the `for range` loop. Then in `main()`, we pass in an array and the `sayGreeting` function that we defined earlier. So this would just say good morning to each name in the array passed in
+
+Another thing to note is that these functions are simply printing. If we wanted to `return` something, then we'd have to explicitly put that on the `func` lined as shown below
+```go
+func circleArea(r float64) float64 {
+    return math.Pi * r * r
+}
+```
