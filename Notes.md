@@ -215,3 +215,50 @@ for _, value := range names {
 for index := range names {
     fmt.Println(index)
 }
+```
+
+
+## 8. Booleans and Conditionals
+### Booleans
+Booleans in Go are the same as most programming languages. `false` and `true`
+
+```go
+age := 22
+fmt.Println(age < 20)  // false
+fmt.Println(age == 22)  // true
+fmt.Println(age >= 29)  // false
+fmt.Println(age != 33)  // true
+```
+
+### Conditionals
+Also very similar to Java's syntax
+```go
+if age < 22 {
+    fmt.Println("too low")
+} else if age > 22 {
+    fmt.Println("too high")
+} else {
+    fmt.Println("you got it")
+}
+```
+
+This is for `if` statements inside of loops
+```go
+names := []string{"eli", "jaime", "jcast", "ivy"}
+for index, value := range names {
+    if index == 1 {
+        fmt.Println("continuing at pos", index)
+        continue
+    }
+
+    if index > 2 {
+        fmt.Println("breaking at pos", index)
+        break
+    }
+
+    fmt.Println(index, value)
+}
+```
+What `continue` will do is if `index == 1` is `true`, then everything under it will not execute. It will just continue the for loop and skipping all the code under it. 
+
+What `break` will do is if `index > 2` is `true`, then the for loop will break and it will no longer execute even if we didnt get through the entire names range
