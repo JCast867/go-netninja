@@ -374,3 +374,54 @@ To **update** an item in the map, you can do so like this:
 ```go
 menu["water"] = 4.99
 ```
+
+
+## 13. Pass by Value
+### Go is a Pass-by-value language
+* Go makes "copies" of values when passed into functions
+
+If we have this code (this applies to strings, ints, bools, floats, arrays, and structs):
+```go
+func updateName(x string) {
+	x = "wedge"
+}
+
+func main() {
+	name := "jaime"
+	updateName(name)
+	fmt.Println(name)
+}
+```
+You'd expect the result to be `wedge`. This is not the case though. `jaime` is still returned. Why does this happen? Go passes in a **copy** of the `name` variable to the `updateName` function. So it's not the original `name` variable. Just a copy of it. So the copy is being changed, not the original variable.
+
+One way to fix this is by returning the value instead like the following:
+```go
+func updateName(x string) string {
+	x = "wedge"
+	return x
+}
+
+func main() {
+	name := "jaime"
+	name = updateName(name)
+	fmt.Println(name)
+}
+```
+If you do not include the `name = updateName(name)`, then the code will still return `jaime` as seen before. 
+
+However, these types act differently compared to the ones listed above (slices, maps, functions)
+
+```go
+func updateMenu(y map[string]float64) {
+	y["coffee"] = 2.99
+}
+func main() {
+    menu := map[string]float64{
+		"pie":       5.95,
+		"ice cream": 3.99,
+	}
+    updateMenu(menu)
+	fmt.Println(menu)
+}
+```
+In this instance, the coffee item will be added to this even though a copy was created. Why does this happen? `menu` is being passed in and this `menu` variable gets copied. But this copies variable still points to the same address aas the key value pairs in the `menu` variable. And since they're pointing to the same pairs, the `menu` variable will be updated.

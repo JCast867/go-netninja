@@ -4,13 +4,17 @@ import (
 	"fmt"
 )
 
-func main() {
-	menu := map[string]float64{
-		"soup":  4.99,
-		"pie":   7.98,
-		"water": 3.47,
-	}
+func updateName(x string) string {
+	x = "wedge"
+	return x
+}
 
-	fmt.Println(menu)
-	fmt.Println(menu["pie"])
+func updateMenu(y map[string]float64) {
+	y["coffee"] = 2.99
+}
+
+func main() {
+	name := "jaime"
+	name = updateName(name)
+	fmt.Println(name)
 }
