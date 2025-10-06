@@ -349,3 +349,28 @@ func main() {
 	showScore()
 }
 ```
+
+
+## 12. Maps
+Maps are very similar to dictionaries in Python. The main difference is that the key and value pairs have to remain the same type as defined. If you defined the key as a string and the value as an integer, you can't pass another type into them
+```go
+menu := map[string]float64{
+		"soup":  4.99,
+		"pie":   7.98,
+		"water": 3.47,
+	}
+fmt.Println(menu)
+fmt.Println(menu["pie"])  // to get just the value
+```
+
+This is how to loop through maps:
+```go
+for k, v := range menu {
+    fmt.Println(k, "-", v)
+}
+```
+
+To **update** an item in the map, you can do so like this:
+```go
+menu["water"] = 4.99
+```

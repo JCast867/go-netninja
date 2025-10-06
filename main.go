@@ -4,14 +4,13 @@ import (
 	"fmt"
 )
 
-var score = 67
-
 func main() {
-	sayHello("mario")
-
-	for _, v := range points {
-		fmt.Println(v)
+	menu := map[string]float64{
+		"soup":  4.99,
+		"pie":   7.98,
+		"water": 3.47,
 	}
 
-	showScore()
+	fmt.Println(menu)
+	fmt.Println(menu["pie"])
 }
