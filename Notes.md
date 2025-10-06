@@ -325,3 +325,27 @@ func main() {
 	fmt.Println(k, l)
 }
 ```
+
+## 11. Package Scopes
+If you have two Go files, `main.go` and `greetings.go` for this example, and they're in the same directory, as long as they both have `package main` on top, then the global functions and variables defined in each one will work in the other. 
+
+If in `greetings.go` I have this defined:
+```go
+var points = []int{25, 70, 56, 80}
+
+func sayHello(n string) {
+	fmt.Println("Hello", n)
+}
+```
+It's fine for me to call them in `main.go` and everything will work fine and vice versa if I had something in `main.go` and wanted to call it in `greetings.go`:
+```go
+func main() {
+	sayHello("mario")
+
+	for _, v := range points {
+		fmt.Println(v)
+	}
+
+	showScore()
+}
+```
