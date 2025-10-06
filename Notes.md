@@ -425,3 +425,34 @@ func main() {
 }
 ```
 In this instance, the coffee item will be added to this even though a copy was created. Why does this happen? `menu` is being passed in and this `menu` variable gets copied. But this copies variable still points to the same address aas the key value pairs in the `menu` variable. And since they're pointing to the same pairs, the `menu` variable will be updated.
+
+
+## 14. Pointers
+Pointers, just like in C, are a way to reference an address in memory. If we had a variable defined and we wanted to get the memory address of it, we can do so using the `&`. This will give us a memory address of `0x14000010040` or whatever it is for you.
+```go
+name := "jaime"
+fmt.Println(&name)
+```
+
+To get the value at the specified memory address, we can use `*`
+```go
+m := name
+fmt.Println(*m)
+```
+And with this we'd get `jaime`.
+
+Using pointers allows us to fix the issue that we had before with Go passing in copies inside of funtions. Since now we'd be able to pass in the address and the copy will point to the same address as the variable and it'll update it
+```go
+func updateName(n *string) {
+	*n = "wedge"
+}
+
+func main() {
+	name := "jaime"
+	m := &name
+
+	updateName(m) // using pointer as arg, can pass &name
+	fmt.Println(name)
+}
+```
+And with this, we'd get `wedge` now.

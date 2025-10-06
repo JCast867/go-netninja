@@ -4,9 +4,8 @@ import (
 	"fmt"
 )
 
-func updateName(x string) string {
+func updateName(x string) {
 	x = "wedge"
-	return x
 }
 
 func updateMenu(y map[string]float64) {
@@ -15,6 +14,10 @@ func updateMenu(y map[string]float64) {
 
 func main() {
 	name := "jaime"
-	name = updateName(name)
+	updateName(name)
+	fmt.Println(&name)
+	m := &name
+	fmt.Println(m)
+	fmt.Println(*m)
 	fmt.Println(name)
 }
