@@ -456,3 +456,25 @@ func main() {
 }
 ```
 And with this, we'd get `wedge` now.
+
+
+## 15. Structs and Custom Types
+Unlike most programming languages, Go does not have classes. Instead, Go uses custom types to create a `struct`. A `struct` is a blueprint a type of data
+```go
+type bill struct {
+    name string
+    items map[string]float64
+    tip float64
+}
+```
+
+And we can define a function to create a new bill
+```go
+func newBill(name string) bill {
+    b := bill{
+        name: name,
+        items: map[string]float64{},
+        tip: 0,
+    }
+    return b
+}
