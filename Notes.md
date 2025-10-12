@@ -478,3 +478,22 @@ func newBill(name string) bill {
     }
     return b
 }
+```
+
+
+## 16. Receiver Functions
+If you want to call a function using dot notation, i.e. `myBill.format()`, then you'll need to build **receiver functions**. These can be defined in the same file as the struct was. To do so, you will need to pass in the bill struct **before** the name of the function and **after** the `func` keyword
+```go
+func (b bill) format() string {
+    fs := "Bill Breakdown: \n"
+    var total float64 = 0
+
+    for k, v := range b.items {
+        fs += fmt.Sprintf("%v ...$%v \n", k+":", v)
+        total += v
+    }
+    fs += fmt.Sprintf("%v ...$%0.2f", "total:", total)
+    return fs
+}
+```
+So we're adding `(b bill)` after the `func` keyword. In this `format()` function, we're printing out the list of items and the total. So we initialize the variables, then we loop through `b`'s items (since every bill has items in it) and adding the value of the items to the total and then once that loop is over, adding the total to the string and printing it out
