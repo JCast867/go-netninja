@@ -497,3 +497,27 @@ func (b bill) format() string {
 }
 ```
 So we're adding `(b bill)` after the `func` keyword. In this `format()` function, we're printing out the list of items and the total. So we initialize the variables, then we loop through `b`'s items (since every bill has items in it) and adding the value of the items to the total and then once that loop is over, adding the total to the string and printing it out
+
+
+## 17. Receiver Functions with Pointers
+We can create more receiver functions that can update and add more items to the bill list
+```go
+// update tip
+func (b bill) updateTip(tip float64) {
+    b.tip = tip
+}
+
+// add items to the bill
+func (b bill) addItem(name string, price float64) {
+    b.items[name] = price
+}
+```
+But if you try to print these updates out in `main.go`, they won't actually appear. And the reason why is because of what we talked about before where Go creates a copy of the item passed in. It does the exact same thing here. 
+
+To fix this, we can pass in pointers into the function like so
+```go
+func (b *bill) updateTip(tip float64) {
+    b.tip = tip
+}
+```
+Now it won't make a copy of the item and it'll work. It's also important to note that it's best practice to pass in pointers as much as you can so that you're not making so many copies of objects
