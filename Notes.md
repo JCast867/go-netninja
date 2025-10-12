@@ -521,3 +521,56 @@ func (b *bill) updateTip(tip float64) {
 }
 ```
 Now it won't make a copy of the item and it'll work. It's also important to note that it's best practice to pass in pointers as much as you can so that you're not making so many copies of objects
+
+
+## 18. User Input
+To actually be able to read input from a user we need a reader. The `bufio` package provides us this and we can define it using `bufio.NewReader`. In this reader, however, we need to be able to get inpur from the user in the console. So, we can use the `os` package and define it using `os.Stdin` (standard input).
+```go
+func createBill() bill {
+    reader := bufio.NewReader(os.Stdin)
+
+    fmt.Print("Create a new bill name: ")
+    name, _ := reader.ReadString('\n')  // when the user clicks enter, the string will be read
+    name = strings.TrimSpace(name)
+
+    b := newBill(name)
+    fmt.Println("Created the bill - ", b.name)
+
+    return b
+}
+```
+The function `createBill()` will return a `bill` type object. It will initalize a reader, print to the console the prompt, get the name, trim the whitespace in the name, initalize a varaible `b` using the name, print out the bill created with the name, and return the bill `b`
+
+The only down side to this is that this can get repetative if we have multiple prompts that we want to get the user. So what we can do is create a different functions that gets the input instead
+```go
+func getInput(prompt string, r *bufio.Reader) (string, error) {
+    fmt.Print(prompt)
+
+    input, err := r.ReadString('\n')
+
+    return strings.TrimSpace(input), err
+}
+
+// now createBill() can look like this
+func createBill() bill {
+    reader := bufio.NewReader(os.Stdin)
+    name, _ := getInput("Create a new bill name: ", reader)
+
+    b := newBill(name)
+    fmt.Println("Created the bill - ", b.name)
+    return b
+}
+```
+In `getInput()`, we pass in the `prompt` as a `string` and `r` as a pointer to `bufio.Reader`. The reason we pass r as a pointer to `bufio.Reader` is because when we hover over the `reader` variable in `createBill()`, it says `var reader *bufio.Reader` so we have to pass that type in. Then we do exactly what we did earlier in getting the standard input put now using the parameters passed in.
+
+Then in `createBill()` we just use this function now to make our lives easier. 
+
+We can create a new function that gives the user some options to what they can do once their bill is created
+```go
+func promptOptions(b bill) {
+    reader := bufio.NewReader(os.Stdin)
+    opt, _ := getInput("Choose option (a - add an item, s - save the bill, t - add tip):", reader)
+    fmt.Println(opt)
+}
+```
+For now, this function doesn't work how we intend for it to work but it will once we finish the next couple of topics
