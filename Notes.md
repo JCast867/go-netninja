@@ -574,3 +574,35 @@ func promptOptions(b bill) {
 }
 ```
 For now, this function doesn't work how we intend for it to work but it will once we finish the next couple of topics
+
+
+## 19. Switch Statements
+Switch statements are pretty straightforward and similar to other programming languages. You use the `switch` keyword with the parameter next to it, then you define the cases where this parameter is equal to the cases
+```go
+func promptOptions(b bill) {
+    reader := bufio.NewReader(os.Stdin)
+    opt, _ := getInput("Choose option (a - add an item, s - save the bill, t - add tip): ", reader)
+
+    switch opt {
+        // if it's a, we get the name of the item they want to add and the price and we print out the name and price
+        case "a":
+            name, _ := getInput("Item name: ", reader)
+            price, _ := getInput("Item price: ", reader)
+            fmt.Println(name, price)
+
+        // if its t, we get the tip amount and print out the tip
+        case "t":
+            tip, _ := getInput("Enter tip amount ($): ", reader)
+            fmt.Println(tip)
+
+        // leaving this empty for now
+        case "s":
+            fmt.Println("You chose s")
+
+        // if none of the other options were chose, then this gets printed out
+        default:
+            fmt.Println("That was not a valid option. Try again")
+            promptOptions(b)  // so the user has to chose an actual option
+    }
+}
+```
