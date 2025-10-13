@@ -690,3 +690,66 @@ So we pass in a pointer like we have been doing with the other receiver function
 If there is an error, then we use the `panic()` function that will stop everything. Then we print to the console that the bill was added. 
 
 Then we add this to the `case "s":` and it will save the files to a bills folder
+
+
+## 22. Interfaces
+So imagine we have two structs like the following
+```go
+type square struct {
+    length float64
+}
+
+type circle struct {
+    radius float64
+}
+```
+
+Then we define some receiver functions for them
+```go
+// square methods
+func (s square) area() float64 {
+    return s.length * s.length
+}
+func (s square) circumf() float64 {
+    return s.length * 4
+}
+
+// circle methods
+func (c circle) area() float64 {
+    return math.Pi * c.radius * c.radius
+}
+func (c circle) circumf() float64 {
+    return 2 * math.Pi * c.radius
+}
+```
+
+And with these methods, we wanted to print out the shape
+```go
+func printShapeInfo(s shape) {
+    fmt.Printf("area of %T is %0.2f \n", s, s.area())
+    fmt.Printf("circumference of %T is %0.2f \n", s, s.circumf())
+}
+```
+But if we want to pass in a circle or square, we'd only be able to pass in one of these. So if we want to be able to pass in both, we can create an interface
+```go
+type shape interface {
+    area() float64
+    circumf() float64
+}
+```
+Now this will work for both shapes and we can pass this into main
+```go
+func main() {
+	shapes := []shape{
+		square{length: 15.2},
+		circle{radius: 7.5},
+		circle{radius: 12.3},
+		square{length: 4.9},
+	}
+
+	for _, v := range shapes {
+		printShapeInfo(v)
+		fmt.Println("---")
+	}
+}
+```
