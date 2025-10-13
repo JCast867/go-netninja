@@ -669,3 +669,24 @@ func promptOptions(b bill) {
 	}
 }
 ```
+
+
+## 21. Saving Files
+To save the bill, we'll create another receiver function
+```go
+func (b *bill) save() {
+    data := []byte(b.format())
+
+    err := os.WriteFile("bills/"+b.name+".txt", data, 0644)
+
+    if err != nil {
+        panic(err)
+    }
+    fmt.Println("bill was saved to file")
+}
+```
+So we pass in a pointer like we have been doing with the other receiver functions. The reason why our data is in bytes is because to write the function to a file, it has to be in bytes. So we do so like shown above. Then we assign `err` to the `os.WriteFile()` function. `"bills/"` comes from the directory name, `b.name` adds the name to the file, `".txt"` adds the extention that this will be a text file, `data` gives the data that we got above, and `0644` is for the permission.
+
+If there is an error, then we use the `panic()` function that will stop everything. Then we print to the console that the bill was added. 
+
+Then we add this to the `case "s":` and it will save the files to a bills folder
