@@ -606,3 +606,66 @@ func promptOptions(b bill) {
     }
 }
 ```
+One important thing to note is that the name, price, and tip that the user types in will be a **string**. And as we saw before, the price and tip have to be a `float64`
+
+
+## 20. Parsing Floats
+To parse strings into floats we can use the `strconv` package and use it like the following
+```go
+case "a":
+    name, _ := getInput("Item name: ", reader)
+    price, _ := getInput("Item price: ", reader)
+
+    p, err := strconv.ParseFloat(price, 64)  // 64 is for the bit size
+
+    // if there is an error like a string 'h' for example being passed in, then this part executes
+    if err != nil {
+        fmt.Println("The price must be a number")
+        promptOptions(b)
+    }
+    b.addItem(name, p)
+    fmt.Println("Item added - ", name, price)
+    promptOptions(b)
+```
+So we use `strconv.ParseFloat()` to get the string converted to a float and an error. Then we check if there is an error and if there is to try again, then we use the receiver functions defined before to add the item into the bill. This will the full code for the tip part
+```go
+func promptOptions(b bill) {
+	reader := bufio.NewReader(os.Stdin)
+
+	opt, _ := getInput("Choose option (a - add an item, s - save the bill, t - add tip): ", reader)
+
+	switch opt {
+	case "a":
+		name, _ := getInput("Item name: ", reader)
+		price, _ := getInput("Item price: ", reader)
+
+		p, err := strconv.ParseFloat(price, 64)
+		if err != nil {
+			fmt.Println("The price must be a number")
+			promptOptions(b)
+		}
+		b.addItem(name, p)
+
+		fmt.Println("Item added - ", name, price)
+		promptOptions(b)
+	case "t":
+		tip, _ := getInput("Enter tip amount ($): ", reader)
+
+		t, err := strconv.ParseFloat(tip, 64)
+		if err != nil {
+			fmt.Println("The tip must be a number")
+			promptOptions(b)
+		}
+
+		b.updateTip(t)
+		fmt.Println("Tip added - ", tip)
+		promptOptions(b)
+	case "s":
+		fmt.Println("You chose to save the bill")
+
+	default:
+		fmt.Println("That was not a valid option...")
+		promptOptions(b)
+	}
+}
+```
